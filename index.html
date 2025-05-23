@@ -3,137 +3,816 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coming Soon - Sika Wireless</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Sikawireless - Secure Digital Banking for Ghana</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#4F46E5',secondary:'#10B981'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="img/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
     <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
         body {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-            color: #ffffff;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+        }
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #4F46E5, #10B981);
+        }
+        .hero-bg {
+            position: relative;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.7) 70%, rgba(255,255,255,0) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        input:focus {
+            outline: none;
+        }
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 2px solid #e2e8f0;
+            border-radius: 4px;
+            cursor: pointer;
             display: flex;
             align-items: center;
+            justify-content: center;
+            outline: none;
         }
-        .coming-soon-container {
-            padding: 4rem 2rem;
+        .custom-checkbox:checked {
+            background-color: #4F46E5;
+            border-color: #4F46E5;
         }
-        .logo {
-            max-width: 200px;
-            margin-bottom: 2rem;
+        .custom-checkbox:checked::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
         }
-        .countdown {
-            font-size: 2.5rem;
-            font-weight: bold;
-            margin: 2rem 0;
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .countdown-item {
+        .switch {
+            position: relative;
             display: inline-block;
-            margin: 0 1rem;
+            width: 50px;
+            height: 24px;
         }
-        .countdown-item span {
-            display: block;
-            font-size: 1rem;
-            text-transform: uppercase;
-            opacity: 0.8;
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
         }
-        .newsletter-form {
-            max-width: 500px;
-            margin: 2rem auto;
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e2e8f0;
+            transition: .4s;
+            border-radius: 24px;
         }
-        .social-links {
-            margin-top: 2rem;
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
         }
-        .social-links a {
-            color: #ffffff;
-            font-size: 1.5rem;
-            margin: 0 1rem;
-            transition: opacity 0.3s;
+        input:checked + .slider {
+            background-color: #4F46E5;
         }
-        .social-links a:hover {
-            opacity: 0.8;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
-            padding: 0.5rem 2rem;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
+        input:checked + .slider:before {
+            transform: translateX(26px);
         }
     </style>
 </head>
-<body>
-    <div class="container coming-soon-container text-center">
-        <img src="https://via.placeholder.com/200x80?text=Sika+Wireless" alt="Sika Wireless Logo" class="logo">
-        <h1 class="display-4 mb-4">Coming Soon</h1>
-        <p class="lead mb-5">We're working hard to bring you something amazing. Stay tuned!</p>
-        
-        <div class="countdown">
-            <div class="countdown-item">
-                <span id="days">00</span>
-                <span>Days</span>
-            </div>
-            <div class="countdown-item">
-                <span id="hours">00</span>
-                <span>Hours</span>
-            </div>
-            <div class="countdown-item">
-                <span id="minutes">00</span>
-                <span>Minutes</span>
-            </div>
-            <div class="countdown-item">
-                <span id="seconds">00</span>
-                <span>Seconds</span>
-            </div>
-        </div>
-
-        <div class="newsletter-form">
-            <h3 class="h5 mb-4">Get notified when we launch</h3>
-            <form class="row g-3 justify-content-center">
-                <div class="col-md-8">
-                    <input type="email" class="form-control" placeholder="Enter your email" required>
+<body class="bg-white">
+    <!-- Header Navigation -->
+    <header class="fixed w-full bg-white shadow-sm z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-['Pacifico'] text-primary">
+                        <img src="img/logo.png" alt="logo" class="w-30 h-20"></a>
+                    <nav class="hidden md:flex ml-10 space-x-8">
+                        <a href="#features" class="text-gray-700 hover:text-primary font-medium">Features</a>
+                        <a href="#how-it-works" class="text-gray-700 hover:text-primary font-medium">How It Works</a>
+                        <a href="#nanome" class="text-gray-700 hover:text-primary font-medium">Nanomɛ</a>
+                        <a href="#security" class="text-gray-700 hover:text-primary font-medium">Security</a>
+                    </nav>
                 </div>
-                <div class="col-md-4">
-                    <button type="submit" class="btn btn-primary w-100">Notify Me</button>
+                <div class="flex items-center space-x-4">
+                    <!-- <div class="hidden md:flex items-center space-x-2">
+                        <div class="w-6 h-6 flex items-center justify-center">
+                            <i class="ri-global-line text-gray-600"></i>
+                        </div>
+                        <select class="bg-transparent text-gray-700 text-sm font-medium appearance-none pr-8">
+                            <option>English</option>
+                            <option>Twi</option>
+                            <option>Ga</option>
+                        </select>
+                    </div> -->
+                    <a href="#download" class="hidden md:inline-block px-5 py-2.5 bg-primary text-white font-medium !rounded-button whitespace-nowrap shadow-sm hover:bg-opacity-90 transition-all">Get Started</a>
+                    <button class="md:hidden w-10 h-10 flex items-center justify-center">
+                        <i class="ri-menu-line text-gray-700 text-2xl"></i>
+                    </button>
                 </div>
-            </form>
+            </div>
         </div>
+    </header>
 
-        <div class="social-links">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
+    <!-- Hero Section -->
+    <section class="pt-28 pb-16 hero-bg overflow-hidden" style="background-image: url('img/Feature\ Image.png'); background-size: cover; background-position: center right;">
+        <div class="container mx-auto px-6 w-full">
+            <div class="flex flex-col md:flex-row items-center hero-content">
+                <div class="w-full md:w-1/2 pr-0 md:pr-12">
+                    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-4">Secure Digital Banking for Ghana</h1>
+                    <p class="text-lg md:text-xl text-gray-700 mb-8">Send money, manage loans, and access financial services with ease. Experience the future of banking with Sikawireless.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#download" class="px-8 py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap shadow-md hover:bg-opacity-90 transition-all text-center">Get Started</a>
+                        <a href="#features" class="px-8 py-3 bg-white text-primary border border-primary font-medium !rounded-button whitespace-nowrap shadow-sm hover:bg-gray-50 transition-all text-center">Learn More</a>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2 mt-12 md:mt-0">
+                    <!-- This div is intentionally empty as the background image serves as the right side content -->
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Key Features Section -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Powerful Financial Features</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Experience comprehensive financial services designed specifically for Ghanaians.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Digital Wallet Feature -->
+                <div class="bg-white p-8 rounded-lg shadow-md feature-card transition-all duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <div class="w-8 h-8 flex items-center justify-center">
+                            <i class="ri-wallet-3-line text-primary ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Digital Wallet</h3>
+                    <p class="text-gray-600 mb-6">Securely manage your money with our intuitive digital wallet. Track balances, view transaction history, and toggle visibility for privacy.</p>
+                    <!-- <div class="flex items-center text-primary font-medium">
+                        <span>Learn more</span>
+                        <div class="w-5 h-5 flex items-center justify-center ml-2">
+                            <i class="ri-arrow-right-line"></i>
+                        </div>
+                    </div> -->
+                </div>
+                
+                <!-- Money Transfers Feature -->
+                <div class="bg-white p-8 rounded-lg shadow-md feature-card transition-all duration-300">
+                    <div class="w-16 h-16 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <div class="w-8 h-8 flex items-center justify-center">
+                            <i class="ri-exchange-funds-line text-secondary ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Money Transfers</h3>
+                    <p class="text-gray-600 mb-6">Send money locally and internationally with ease. Enjoy seamless integration with mobile money services and direct peer-to-peer transfers.</p>
+                    <!-- <div class="flex items-center text-primary font-medium">
+                        <span>Learn more</span>
+                        <div class="w-5 h-5 flex items-center justify-center ml-2">
+                            <i class="ri-arrow-right-line"></i>
+                        </div>
+                    </div> -->
+                </div>
+                
+                <!-- Nanomɛ Loans Feature -->
+                <div class="bg-white p-8 rounded-lg shadow-md feature-card transition-all duration-300">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-6">
+                        <div class="w-8 h-8 flex items-center justify-center">
+                            <i class="ri-hand-coin-line text-primary ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Nanomɛ Loans</h3>
+                    <p class="text-gray-600 mb-6">Access our innovative peer-to-peer lending platform. Request loans, become a lender, and manage repayments all in one place.</p>
+                    <!-- <div class="flex items-center text-primary font-medium">
+                        <span>Learn more</span>
+                        <div class="w-5 h-5 flex items-center justify-center ml-2">
+                            <i class="ri-arrow-right-line"></i>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Interface Showcase -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Intuitive Mobile Experience</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Our user-friendly interface makes managing your finances simple and secure.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-12 md:space-y-0 md:space-x-8">
+                <!-- Wallet Dashboard -->
+                <div class="relative">
+                    <div class="rounded-3xl p-3 shadow-xl mx-auto max-w-xs">
+                        <div class="w-full h-[550px] rounded-2xl overflow-hidden">
+                            <img src="img/Walletdashboard.png" alt="Wallet Dashboard" class="w-full h-full object-cover object-top">
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white px-6 py-3 rounded-full shadow-md">
+                        <p class="text-gray-800 font-medium whitespace-nowrap">Wallet Dashboard</p>
+                    </div>
+                </div>
+                
+                <!-- Transfer Interface -->
+                <div class="relative">
+                    <div class="rounded-3xl p-3 shadow-xl mx-auto max-w-xs">
+                        <div class="w-full h-[550px] rounded-2xl overflow-hidden">
+                            <img src="img/MoneyTransfer.png" alt="Transfer Interface" class="w-full h-full object-cover object-top">
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white px-6 py-3 rounded-full shadow-md">
+                        <p class="text-gray-800 font-medium whitespace-nowrap">Money Transfer</p>
+                    </div>
+                </div>
+                
+                <!-- Loan Management -->
+                <div class="relative">
+                    <div class="rounded-3xl p-3 shadow-xl mx-auto max-w-xs">
+                        <div class="w-full h-[550px] rounded-2xl overflow-hidden">
+                            <img src="img/Nanom3.png" alt="Loan Management" class="w-full h-full object-cover object-top">
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white px-6 py-3 rounded-full shadow-md">
+                        <p class="text-gray-800 font-medium whitespace-nowrap">Nanomɛ Loans</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="w-full md:w-1/2 mb-12 md:mb-0">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Why Choose Sikawireless?</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 flex items-center justify-center">
+                                    <i class="ri-shield-check-line text-primary ri-lg"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Bank-Grade Security</h3>
+                                <p class="text-gray-600">Your money and data are protected with industry-leading encryption and multi-factor authentication.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 flex items-center justify-center">
+                                    <i class="ri-exchange-dollar-line text-secondary ri-lg"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Multi-Currency Support</h3>
+                                <p class="text-gray-600">Manage GHS as your primary currency while supporting international transfers in multiple currencies.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 flex items-center justify-center">
+                                    <i class="ri-user-follow-line text-primary ri-lg"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Simple KYC Verification</h3>
+                                <p class="text-gray-600">Quick and easy identity verification process that meets all regulatory requirements.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 flex items-center justify-center">
+                                    <i class="ri-smartphone-line text-secondary ri-lg"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Mobile Money Integration</h3>
+                                <p class="text-gray-600">Seamlessly connect with popular mobile money services in Ghana for easy deposits and withdrawals.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2 md:pl-12">
+                    <img src="https://readdy.ai/api/search-image?query=A%20professional%20African%20businessman%20using%20a%20smartphone%20for%20mobile%20banking%20while%20sitting%20in%20a%20modern%20office%20environment.%20He%20looks%20satisfied%20and%20confident%20as%20he%20manages%20his%20finances.%20The%20image%20shows%20the%20phone%20screen%20with%20a%20banking%20app%20interface.%20The%20setting%20is%20bright%20and%20professional%20with%20office%20elements%20visible%20in%20the%20background.&width=800&height=600&seq=5&orientation=landscape" alt="Benefits" class="rounded-lg shadow-xl w-full">
+                    
+                    <div class="grid grid-cols-2 gap-6 mt-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="text-3xl font-bold text-primary mb-2">98%</div>
+                            <p class="text-gray-600">User satisfaction rate</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="text-3xl font-bold text-primary mb-2">2M+</div>
+                            <p class="text-gray-600">Transactions processed</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="text-3xl font-bold text-primary mb-2">50K+</div>
+                            <p class="text-gray-600">Active users</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <div class="text-3xl font-bold text-primary mb-2">24/7</div>
+                            <p class="text-gray-600">Customer support</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">How It Works</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Get started with Sikawireless in just a few simple steps.</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start">
+                <!-- Step 1 -->
+                <div class="w-full md:w-1/4 text-center mb-12 md:mb-0">
+                    <div class="relative">
+                        <div class="w-20 h-20 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <div class="w-10 h-10 flex items-center justify-center">
+                                <i class="ri-download-line text-primary ri-2x"></i>
+                            </div>
+                        </div>
+                        <div class="hidden md:block absolute top-10 left-full w-full h-0.5 bg-gray-200 -z-10"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Download & Register</h3>
+                    <p class="text-gray-600 px-4">Download the app and create your account with basic information.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="w-full md:w-1/4 text-center mb-12 md:mb-0">
+                    <div class="relative">
+                        <div class="w-20 h-20 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <div class="w-10 h-10 flex items-center justify-center">
+                                <i class="ri-user-follow-line text-secondary ri-2x"></i>
+                            </div>
+                        </div>
+                        <div class="hidden md:block absolute top-10 left-full w-full h-0.5 bg-gray-200 -z-10"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Complete KYC</h3>
+                    <p class="text-gray-600 px-4">Verify your identity with our simple and secure KYC process.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="w-full md:w-1/4 text-center mb-12 md:mb-0">
+                    <div class="relative">
+                        <div class="w-20 h-20 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <div class="w-10 h-10 flex items-center justify-center">
+                                <i class="ri-wallet-3-line text-primary ri-2x"></i>
+                            </div>
+                        </div>
+                        <div class="hidden md:block absolute top-10 left-full w-full h-0.5 bg-gray-200 -z-10"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Add Funds</h3>
+                    <p class="text-gray-600 px-4">Top up your wallet using mobile money or bank transfer.</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="w-full md:w-1/4 text-center">
+                    <div class="w-20 h-20 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div class="w-10 h-10 flex items-center justify-center">
+                            <i class="ri-exchange-funds-line text-secondary ri-2x"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Start Transacting</h3>
+                    <p class="text-gray-600 px-4">Send money or apply for Nanomɛ loans instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nanomɛ Feature Spotlight -->
+    <section id="nanome" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="w-full md:w-1/2 mb-12 md:mb-0">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Introducing Nanomɛ</h2>
+                    <p class="text-lg text-gray-600 mb-8">Our innovative peer-to-peer lending platform that connects borrowers with lenders in a secure, transparent environment.</p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 flex items-center justify-center">
+                                    <i class="ri-hand-coin-line text-primary ri-lg"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Simple Loan Requests</h3>
+                                <p class="text-gray-600">Specify your loan amount, purpose, and repayment terms in just a few taps.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 flex items-center justify-center">
+                                    <i class="ri-percent-line text-secondary ri-lg"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Competitive Interest Rates</h3>
+                                <p class="text-gray-600">Transparent and fair rates that benefit both borrowers and lenders.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 flex items-center justify-center">
+                                    <i class="ri-calendar-check-line text-primary ri-lg"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Flexible Repayment Options</h3>
+                                <p class="text-gray-600">Choose from various repayment schedules that fit your financial situation.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <div class="w-6 h-6 flex items-center justify-center">
+                                    <i class="ri-shield-check-line text-secondary ri-lg"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-900 mb-2">Secure Transactions</h3>
+                                <p class="text-gray-600">All lending activities are protected by our advanced security protocols.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2 md:pl-12">
+                    <div class="rounded-3xl p-3 shadow-xl mx-auto max-w-xs">
+                        <div class="w-full h-[550px] rounded-2xl overflow-hidden">
+                            <img src="img/Nanom3.png" alt="Nanomɛ Loan Interface" class="w-full h-full object-cover object-top">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security & Trust Section -->
+    <section id="security" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Security & Compliance</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Your security is our top priority. We implement industry-leading measures to protect your money and data.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <!-- Multi-factor Authentication -->
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div class="w-8 h-8 flex items-center justify-center">
+                            <i class="ri-lock-password-line text-primary ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Multi-factor Authentication</h3>
+                    <p class="text-gray-600">Extra layers of security to verify your identity before accessing your account.</p>
+                </div>
+                
+                <!-- Data Encryption -->
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="w-16 h-16 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div class="w-8 h-8 flex items-center justify-center">
+                            <i class="ri-shield-keyhole-line text-secondary ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Data Encryption</h3>
+                    <p class="text-gray-600">End-to-end encryption for all your personal and financial information.</p>
+                </div>
+                
+                <!-- Secure Payments -->
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div class="w-8 h-8 flex items-center justify-center">
+                            <i class="ri-secure-payment-line text-primary ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Secure Payments</h3>
+                    <p class="text-gray-600">Protected transaction processing with verification protocols.</p>
+                </div>
+                
+                <!-- Regulatory Compliance -->
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="w-16 h-16 bg-secondary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div class="w-8 h-8 flex items-center justify-center">
+                            <i class="ri-file-list-3-line text-secondary ri-xl"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Regulatory Compliance</h3>
+                    <p class="text-gray-600">Full compliance with Ghana's financial regulations and standards.</p>
+                </div>
+            </div>
+            
+            <!-- <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                <div class="grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all">
+                    <div class="w-24 h-24 flex items-center justify-center">
+                        <i class="ri-bank-fill text-gray-500 ri-3x"></i>
+                    </div>
+                    <p class="text-center text-sm text-gray-500">Bank of Ghana</p>
+                </div>
+                <div class="grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all">
+                    <div class="w-24 h-24 flex items-center justify-center">
+                        <i class="ri-visa-fill text-gray-500 ri-3x"></i>
+                    </div>
+                    <p class="text-center text-sm text-gray-500">Visa Certified</p>
+                </div>
+                <div class="grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all">
+                    <div class="w-24 h-24 flex items-center justify-center">
+                        <i class="ri-mastercard-fill text-gray-500 ri-3x"></i>
+                    </div>
+                    <p class="text-center text-sm text-gray-500">Mastercard Partner</p>
+                </div>
+                <div class="grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all">
+                    <div class="w-24 h-24 flex items-center justify-center">
+                        <i class="ri-paypal-fill text-gray-500 ri-3x"></i>
+                    </div>
+                    <p class="text-center text-sm text-gray-500">PayPal Verified</p>
+                </div>
+                <div class="grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all">
+                    <div class="w-24 h-24 flex items-center justify-center">
+                        <i class="ri-shield-star-fill text-gray-500 ri-3x"></i>
+                    </div>
+                    <p class="text-center text-sm text-gray-500">PCI DSS Compliant</p>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="download" class="py-20 bg-gradient-to-r from-primary to-secondary text-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="w-full md:w-1/2 mb-12 md:mb-0">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Download Sikawireless Today</h2>
+                    <p class="text-lg mb-8 text-white text-opacity-90">Get started with secure digital banking designed for Ghanaians. Available on iOS and Android.</p>
+                    
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+                        <a href="#" onclick="showComingSoon(event)" class="flex items-center bg-black px-6 py-3 rounded-lg hover:bg-opacity-80 transition-all">
+                            <div class="w-8 h-8 flex items-center justify-center mr-3">
+                                <i class="ri-apple-fill ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs">Download on the</div>
+                                <div class="text-lg font-semibold">App Store</div>
+                            </div>
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.ecentials_org.sikawireless" target="_blank" class="flex items-center bg-black px-6 py-3 rounded-lg hover:bg-opacity-80 transition-all">
+                            <div class="w-8 h-8 flex items-center justify-center mr-3">
+                                <i class="ri-google-play-fill ri-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs">Get it on</div>
+                                <div class="text-lg font-semibold">Google Play</div>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <!-- <div class="flex items-center">
+                        <div class="w-32 h-32 bg-white p-4 rounded-lg">
+                            <img src="https://readdy.ai/api/search-image?query=A%20QR%20code%20on%20a%20white%20background%20that%20would%20link%20to%20a%20mobile%20app%20download%20page.%20The%20QR%20code%20should%20be%20clear%2C%20black%20on%20white%2C%20and%20centered%20in%20the%20frame.&width=200&height=200&seq=7&orientation=squarish" alt="QR Code" class="w-full h-full">
+                        </div>
+                        <div class="ml-6">
+                            <p class="font-medium mb-2">Scan to download</p>
+                            <p class="text-sm text-white text-opacity-80">Or visit sikawireless.com/download</p>
+                        </div>
+                    </div> -->
+                </div>
+                
+                <div class="w-full md:w-1/2 md:pl-12">
+                    <div class="relative">
+                        <div class="rounded-3xl p-3 shadow-2xl mx-auto max-w-xs">
+                            <div class="w-full h-[550px] rounded-2xl overflow-hidden">
+                                <img src="img/Image1.png" alt="Sikawireless App" class="w-full h-full object-cover object-top">
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 bg-white text-gray-900 px-6 py-3 rounded-full shadow-lg">
+                            <div class="flex items-center">
+                                <div class="flex">
+                                    <div class="w-5 h-5 flex items-center justify-center text-yellow-400">
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                    <div class="w-5 h-5 flex items-center justify-center text-yellow-400">
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                    <div class="w-5 h-5 flex items-center justify-center text-yellow-400">
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                    <div class="w-5 h-5 flex items-center justify-center text-yellow-400">
+                                        <i class="ri-star-fill"></i>
+                                    </div>
+                                    <div class="w-5 h-5 flex items-center justify-center text-yellow-400">
+                                        <i class="ri-star-half-fill"></i>
+                                    </div>
+                                </div>
+                                <span class="ml-2 font-medium">4.8/5</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <!-- <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">Stay Updated</h2>
+                <p class="text-gray-600 mb-8">Subscribe to our newsletter for the latest features, updates, and financial tips.</p>
+                
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0">
+                    <input type="email" placeholder="Enter your email" class="flex-grow px-6 py-3 rounded-l-lg sm:rounded-r-none border-none focus:ring-2 focus:ring-primary">
+                    <button class="px-8 py-3 bg-primary text-white font-medium rounded-r-lg sm:rounded-l-none !rounded-button whitespace-nowrap hover:bg-opacity-90 transition-all">Subscribe</button>
+                </div>
+                
+                <div class="mt-4 flex items-center justify-center">
+                    <input type="checkbox" id="privacy-consent" class="custom-checkbox">
+                    <label for="privacy-consent" class="ml-2 text-sm text-gray-600">I agree to receive marketing communications from Sikawireless</label>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div>
+                    <a href="#" class="text-2xl font-['Pacifico'] text-white mb-6 inline-block">logo</a>
+                    <p class="text-gray-400 mb-6">Sikawireless is a comprehensive mobile financial service platform designed to provide secure digital wallet management, transaction capabilities, and innovative peer-to-peer lending.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-facebook-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-twitter-x-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-instagram-fill"></i>
+                            </div>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-all">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-linkedin-fill"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Features</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Digital Wallet</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Money Transfers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Nanomɛ Loans</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Mobile Money</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">International Transfers</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Company</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-6">Support</h3>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Terms of Service</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-all">Security</a></li>
+                        <li>
+                            <div class="flex items-center">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-customer-service-2-fill text-primary"></i>
+                                </div>
+                                <span>+233 30 123 4567</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 Sikawireless. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 flex items-center justify-center mr-2">
+                                <i class="ri-visa-fill text-gray-400 ri-lg"></i>
+                            </div>
+                            <div class="w-8 h-8 flex items-center justify-center mr-2">
+                                <i class="ri-mastercard-fill text-gray-400 ri-lg"></i>
+                            </div>
+                            <div class="w-8 h-8 flex items-center justify-center mr-2">
+                                <i class="ri-paypal-fill text-gray-400 ri-lg"></i>
+                            </div>
+                            <div class="w-8 h-8 flex items-center justify-center">
+                                <i class="ri-bank-card-fill text-gray-400 ri-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Set the launch date (1 month from now)
-        const launchDate = new Date();
-        launchDate.setMonth(launchDate.getMonth() + 1);
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', function() {
+                    // Mobile menu functionality would go here
+                    console.log('Mobile menu clicked');
+                });
+            }
+            
+            // Custom checkbox functionality
+            const checkboxes = document.querySelectorAll('.custom-checkbox');
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    this.checked = !this.checked;
+                });
+            });
+        });
 
-        function updateCountdown() {
-            const now = new Date();
-            const difference = launchDate - now;
-
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        // Function to show coming soon banner
+        function showComingSoon(event) {
+            event.preventDefault();
+            const banner = document.createElement('div');
+            banner.className = 'fixed top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-3 rounded-lg shadow-lg z-50 flex items-center';
+            banner.innerHTML = `
+                <i class="ri-information-line mr-2"></i>
+                <span>Coming soon to App Store!</span>
+            `;
+            document.body.appendChild(banner);
+            
+            // Remove banner after 3 seconds
+            setTimeout(() => {
+                banner.remove();
+            }, 3000);
         }
-
-        // Update countdown every second
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
     </script>
 </body>
-</html> 
+</html>
